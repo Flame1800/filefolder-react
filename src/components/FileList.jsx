@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import cn from 'classnames';
-import _ from 'lodash'
+
 // import axios from 'axios';
 
 import Modal from './Modal.jsx';
@@ -21,9 +21,51 @@ export default class FileList extends Component {
                     "type": "image/jpeg",
                     "name": "Фото.docx (образец)",
                     "selected": false
-                }
+                },
+                "21": {
+                    "id": 21,
+                    "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "name": "Документ Microsoft Office Word.docx (образец)",
+                    "selected": false
+                },
+                "42": {
+                    "id": 42,
+                    "type": "image/jpeg",
+                    "name": "Фото.docx (образец)",
+                    "selected": false
+                },
+                "61": {
+                    "id": 61,
+                    "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "name": "Документ Microsoft Office Word.docx (образец)",
+                    "selected": false
+                },
+                "72": {
+                    "id": 72,
+                    "type": "image/jpeg",
+                    "name": "Фото.docx (образец)",
+                    "selected": false
+                },
+                "15": {
+                    "id": 15,
+                    "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "name": "Документ Microsoft Office Word.docx (образец)",
+                    "selected": false
+                },
+                "224": {
+                    "id": 224,
+                    "type": "image/jpeg",
+                    "name": "Фото.docx (образец)",
+                    "selected": false
+                },
+                "9": {
+                    "id": 9,
+                    "type": "image/jpeg",
+                    "name": "Фото.docx (образец)",
+                    "selected": false
+                },
             },
-            filesIds: [11, 22],
+            filesIds: [11, 22, 21, 42, 61, 72, 15, 224, 9],
             modal: false,
             buttonStateDisable: true,
         }
@@ -53,22 +95,6 @@ export default class FileList extends Component {
         }
     }
 
-    deleteFileHandler = (id) => (e) => {
-        const { files } = this.state;
-        const newFiles = _.omit(files, id)
-        this.setState({
-            files: newFiles,
-            filesIds: [...Object.keys(newFiles)],
-        });
-
-    }
-
-    loadFileHandler = (e) => {
-        e.preventDefault();
-        const data = e.target.files;
-        this.fileLoader(data)
-    }
-
     fileLoader = (data) => {
         const filesJsApi = Object.keys(data);
         const files = {};
@@ -90,7 +116,6 @@ export default class FileList extends Component {
         const { files, filesIds, modal, buttonStateDisable } = this.state;
         //console.log(files, filesIds);
         const mapfiles = filesIds.map((id) => files[id]);
-        const { userRole } = this.props;
 
         const mappingTupeFiles = {
             img: {
@@ -164,41 +189,25 @@ export default class FileList extends Component {
                                 "pdf": mappingTupeFiles.pdf[type],
                                 'video': mappingTupeFiles.video[type]
                             })
-                            if (userRole === 'admin') {
-                                return (
-                                    <li key={id} className='file delete-file' onClick={this.deleteFileHandler(id)}>
-                                        <div className={expClasses}></div>
-                                        <div className="text-file">{name}</div>
-                                    </li>
-                                )
-                            }
-                            else {
-                                return (
-                                    <li key={id} className={fileClasses} onClick={this.selectFileHandler(id)}>
-                                        <div className={expClasses}></div>
-                                        <div className="text-file">{name}</div>
-                                    </li>
-                                )
-                            }
+
+
+                            return (
+                                <li key={id} className={fileClasses} onClick={this.selectFileHandler(id)}>
+                                    <div className={expClasses}></div>
+                                    <div className="text-file">{name}</div>
+                                </li>
+                            )
+
 
                         })}
                     </ul>
                 </div>
-                {userRole === 'admin' ?
-                    <form onSubmit={this.loadFileHandler} >
-                        <input type='file' id='file-input' className='file-input' onChange={this.loadFileHandler} multiple />
-                        <label htmlFor="file-input">
-                            <div className="button">Load File</div>
-                        </label>
-                    </form>
-                    :
-                    <input
-                        type="submit"
-                        disabled={this.state.buttonStateDisable}
-                        onClick={() => this.setState({ modal: true })}
-                        className={buttonClasses}
-                        value="Send to me!" />}
-
+                <input
+                    type="submit"
+                    disabled={this.state.buttonStateDisable}
+                    onClick={() => this.setState({ modal: true })}
+                    className={buttonClasses}
+                    value="Send to me!" />
                 {modal && <Modal files={selectedFiles} closeHandler={() => this.setState({ modal: false })} />}
             </div>
         )

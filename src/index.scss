@@ -51,6 +51,7 @@ input {
   justify-content: center;
   margin-top: 144px;
   width: 530px;
+  margin: 0 auto;
   margin-bottom: 100px;
 }
 
@@ -129,6 +130,7 @@ input {
   font-size: 24px;
   font-weight: 500;
   display: flex;
+  z-index: 4;
   margin: 0 auto;
   cursor: pointer;
 }
@@ -155,9 +157,24 @@ input {
   box-shadow: 0px 20px 120px rgba(0, 0, 0, 0.08);
   margin-top: 50px;
   width: 100%;
-  margin-bottom: 32px;
+  margin-bottom: -32px;
   overflow: auto;
   z-index: 0;
+}
+
+@media screen and (max-width:479px) {
+  /* Target portrait smartphones */
+  .content-investors {
+    width: 360px;
+  }
+  
+  .modal-card {
+    width: 360px;
+  }
+
+  .modal-card .email-input  {
+    max-width: 320px;
+  }
 }
 
 .button-send {
@@ -278,7 +295,6 @@ ul {
 
 .container-modal {
   width: 100%;
-  height: 100vh;
   position: fixed;
   z-index: 999;
   bottom: 0;
