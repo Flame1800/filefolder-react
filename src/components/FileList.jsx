@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import cn from 'classnames';
+<<<<<<< HEAD
+=======
+
+>>>>>>> dd4c94719ff73c953339dceafb79cbd4a6c871e8
 // import axios from 'axios';
 
 export default class FileList extends Component {
@@ -18,9 +22,51 @@ export default class FileList extends Component {
                     "type": "image/jpeg",
                     "name": "Фото.docx (образец)",
                     "selected": false
-                }
+                },
+                "21": {
+                    "id": 21,
+                    "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "name": "Документ Microsoft Office Word.docx (образец)",
+                    "selected": false
+                },
+                "42": {
+                    "id": 42,
+                    "type": "image/jpeg",
+                    "name": "Фото.docx (образец)",
+                    "selected": false
+                },
+                "61": {
+                    "id": 61,
+                    "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "name": "Документ Microsoft Office Word.docx (образец)",
+                    "selected": false
+                },
+                "72": {
+                    "id": 72,
+                    "type": "image/jpeg",
+                    "name": "Фото.docx (образец)",
+                    "selected": false
+                },
+                "15": {
+                    "id": 15,
+                    "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "name": "Документ Microsoft Office Word.docx (образец)",
+                    "selected": false
+                },
+                "224": {
+                    "id": 224,
+                    "type": "image/jpeg",
+                    "name": "Фото.docx (образец)",
+                    "selected": false
+                },
+                "9": {
+                    "id": 9,
+                    "type": "image/jpeg",
+                    "name": "Фото.docx (образец)",
+                    "selected": false
+                },
             },
-            filesIds: [11, 22],
+            filesIds: [11, 22, 21, 42, 61, 72, 15, 224, 9],
             modal: false,
             buttonStateDisable: true,
         }

@@ -8,9 +8,8 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       submittingState: 'fillingForm',
-      userRole: '',
       value: '',
-      passwords: ["admin", "user", ""],
+      passwords: ["admin", "user"],
       errorPassword: false
     };
   }
@@ -22,16 +21,12 @@ export default class App extends React.Component {
     passwords.forEach((password) => {
       if (value === password) {
         this.setState({ errorPassword: false });
-        if (password === 'admin') {
-          this.setState({ submittingState: 'submitted', userRole: 'admin' });
-        } else {
-          this.setState({ submittingState: 'submitted', userRole: 'guest' });
-        }
+        this.setState({ submittingState: 'submitted' })
       } 
       else {
         this.setState({ errorPassword: true });
       }
-    }) 
+    });
   }
 
   renderForm = () => {
