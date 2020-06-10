@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import cn from 'classnames';
-
 // import axios from 'axios';
-
-import Modal from './Modal.jsx';
 
 export default class FileList extends Component {
     constructor(props) {
@@ -95,6 +92,12 @@ export default class FileList extends Component {
         }
     }
 
+    clearSelect = () => {
+        const { files, filesIds } = this.state;
+        const mapfiles = filesIds.map((id) => files[id])
+        this.setState({ files: mapfiles.forEach(({selected}) => selected = false) });
+    }
+
     fileLoader = (data) => {
         const filesJsApi = Object.keys(data);
         const files = {};
@@ -110,11 +113,28 @@ export default class FileList extends Component {
         });
     }
 
+    sendFiles = (e) => {
+        e.preventDefault();
+        const { files, filesIds } = this.state;
+        const mapfiles = filesIds.map((id) => files[id]);
+        const selectedFiles = mapfiles.filter((file) => file.selected === true);
+
+        // ****
+        // Тут должна быть отправка данных вместе с email на php(Бекенд)
+        // ****
+        console.log({ files: selectedFiles, eamil: this.props.email });
+        this.modalHandler();
+    }
+
+    clearSelect = () => this.setState({ files: this.state.files.forEach(({selected}) => selected = false) });
+
+    modalHandler = () => this.setState({ modal: !this.state.modal });
+
 
 
     render() {
+        const { email } = this.props;
         const { files, filesIds, modal, buttonStateDisable } = this.state;
-        //console.log(files, filesIds);
         const mapfiles = filesIds.map((id) => files[id]);
 
         const mappingTupeFiles = {
@@ -143,6 +163,7 @@ export default class FileList extends Component {
             }
         }
 
+
         const buttonClasses = cn({
             "disabled-btn": buttonStateDisable,
             "button": true
@@ -162,7 +183,7 @@ export default class FileList extends Component {
                 </div>
             )
         }
-        const selectedFiles = mapfiles.filter((file) => file.selected === true)
+
 
         return (
             <div className="content-investors">
@@ -173,6 +194,10 @@ export default class FileList extends Component {
                 </div>
                 <div className="light-theme-title">Welcome, Investor!</div>
                 <div className="investors-list-container">
+                    <div className="files-selector">
+                        <div className="btn-clear" onClick={this.clearSelect}>Clear</div>
+                        <div className="btn-select-all">Select All</div>
+                    </div>
                     <ul className="file-list">
                         {mapfiles.map(({ id, type, name, selected }) => {
                             const fileClasses = cn({
@@ -205,10 +230,20 @@ export default class FileList extends Component {
                 <input
                     type="submit"
                     disabled={this.state.buttonStateDisable}
-                    onClick={() => this.setState({ modal: true })}
+                    onClick={this.sendFiles}
                     className={buttonClasses}
                     value="Send to me!" />
-                {modal && <Modal files={selectedFiles} closeHandler={() => this.setState({ modal: false })} />}
+
+                {modal && <div>
+                    <div className="container-modal">
+                        <div className="modal-card">
+                            <div className="modal-header"><div className="close-btn" onClick={this.modalHandler}>+</div></div>
+                            <div className="modal-icon"></div>
+                            <div className="title">Thank You for your interest! <br /> Selected files has been sent to {email} address. </div>
+                        </div>
+                    </div>
+                </div>}
+
             </div>
         )
     }

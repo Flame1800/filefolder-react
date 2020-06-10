@@ -10,7 +10,8 @@ export default class App extends React.Component {
       submittingState: 'fillingForm',
       value: '',
       passwords: ["admin", "user"],
-      errorPassword: false
+      errorPassword: false,
+      currentPassword: '',
     };
   }
 
@@ -20,8 +21,11 @@ export default class App extends React.Component {
 
     passwords.forEach((password) => {
       if (value === password) {
-        this.setState({ errorPassword: false });
-        this.setState({ submittingState: 'submitted' })
+        this.setState({ 
+          submittingState: 'submitted',
+          currentPassword: value,
+          errorPassword: false 
+        });
       } 
       else {
         this.setState({ errorPassword: true });
@@ -55,7 +59,7 @@ export default class App extends React.Component {
       case 'fillingForm':
         return this.renderForm();
       case 'submitted':
-        return <FileList />
+        return <FileList email={this.state.currentPassword} />
       default:
         throw new Error(`'${submittingState}' - unknown state`);
     }
