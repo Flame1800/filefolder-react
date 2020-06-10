@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import cn from 'classnames';
-import _ from 'lodash'
 // import axios from 'axios';
-
-import Modal from './Modal.jsx';
 
 export default class FileList extends Component {
     constructor(props) {
@@ -33,7 +30,7 @@ export default class FileList extends Component {
 
     // componentDidMount() {
     //     axios.get('http://localhost:3004/files').then((res) => {
-    //         this.fileLoader(res.data)
+    //         this.fileLoader(res.data);
     //     })
     // }
 
@@ -53,45 +50,35 @@ export default class FileList extends Component {
         }
     }
 
-    deleteFileHandler = (id) => (e) => {
-        const { files } = this.state;
-        const newFiles = _.omit(files, id)
-        this.setState({
-            files: newFiles,
-            filesIds: [...Object.keys(newFiles)],
-        });
 
-    }
+    // fileLoader = (data) => {
+    //     const filesJsApi = Object.keys(data);
+    //     const files = {};
+    //     filesJsApi.forEach((id) => {
+    //         data[id].selected = false;
+    //         data[id].id = newId;
+    //         files[newId] = data[id];
+    //     });
+    //     this.setState({
+    //         files: { ...files, ...this.state.files },
+    //         filesIds: [...Object.keys(files), ...this.state.filesIds]
+    //     });
+    // }
 
-    loadFileHandler = (e) => {
+
+    sendFiles = (e) => {
         e.preventDefault();
-        const data = e.target.files;
-        this.fileLoader(data)
+        const { files, closeHandler, password } = this.props;
+        console.log(files, password);
+        closeHandler();
     }
 
-    fileLoader = (data) => {
-        const filesJsApi = Object.keys(data);
-        const files = {};
-        filesJsApi.forEach((id) => {
-            const newId = Number.parseInt(Math.floor(Math.random() * 1000));
-            data[id].selected = false;
-            data[id].id = newId;
-            files[newId] = data[id];
-        });
-        this.setState({
-            files: { ...files, ...this.state.files },
-            filesIds: [...Object.keys(files), ...this.state.filesIds]
-        });
-    }
-
-
+    modalHandler = () => this.setState({ modal: !this.state.modal });
 
     render() {
         const { files, filesIds, modal, buttonStateDisable } = this.state;
-        //console.log(files, filesIds);
+        const { password } = this.props;
         const mapfiles = filesIds.map((id) => files[id]);
-        const { userRole } = this.props;
-
         const mappingTupeFiles = {
             img: {
                 "image/png": true,
@@ -137,22 +124,27 @@ export default class FileList extends Component {
                 </div>
             )
         }
-        const selectedFiles = mapfiles.filter((file) => file.selected === true)
 
         return (
             <div className="content-investors">
                 <div className="logo-container">
                     <div className="logo-background">
-                        <div className="logo"></div>
+                        <div className="logo-filefolder"></div>
                     </div>
                 </div>
-                <div className="light-theme-title">Welcome, Investor!</div>
+
+               
                 <div className="investors-list-container">
+                    <div className="title">Welcome, Investor!</div>
+                    <div className="subtitile-filelist">
+                        Here you can choose which files you would <br/> like to receive to Your e-mail
+                    </div>
+                    <hr /> 
                     <ul className="file-list">
                         {mapfiles.map(({ id, type, name, selected }) => {
                             const fileClasses = cn({
                                 "selected-file": selected,
-                                'file': true
+                                'noselected-file': !selected
                             })
                             const expClasses = cn({
                                 "type-icon": true,
@@ -164,42 +156,38 @@ export default class FileList extends Component {
                                 "pdf": mappingTupeFiles.pdf[type],
                                 'video': mappingTupeFiles.video[type]
                             })
-                            if (userRole === 'admin') {
-                                return (
-                                    <li key={id} className='file delete-file' onClick={this.deleteFileHandler(id)}>
-                                        <div className={expClasses}></div>
-                                        <div className="text-file">{name}</div>
-                                    </li>
-                                )
-                            }
-                            else {
-                                return (
-                                    <li key={id} className={fileClasses} onClick={this.selectFileHandler(id)}>
-                                        <div className={expClasses}></div>
-                                        <div className="text-file">{name}</div>
-                                    </li>
-                                )
-                            }
-
+                            return (
+                                <li key={id} className={fileClasses} onClick={this.selectFileHandler(id)}>
+                                    <div className={expClasses}></div>
+                                    <div className="text-file">{name}</div>
+                                </li>
+                            )
                         })}
                     </ul>
+                    <hr />
+                    <div className="footer-btn">
+                        {/* <div className="btn-more">Show more...</div> */}
+                        <div className="btn-clear">Clear</div>
+                    </div>
                 </div>
-                {userRole === 'admin' ?
-                    <form onSubmit={this.loadFileHandler} >
-                        <input type='file' id='file-input' className='file-input' onChange={this.loadFileHandler} multiple />
-                        <label htmlFor="file-input">
-                            <div className="button">Load File</div>
-                        </label>
-                    </form>
-                    :
-                    <input
-                        type="submit"
-                        disabled={this.state.buttonStateDisable}
-                        onClick={() => this.setState({ modal: true })}
-                        className={buttonClasses}
-                        value="Send to me!" />}
 
-                {modal && <Modal files={selectedFiles} closeHandler={() => this.setState({ modal: false })} />}
+                <input
+                    type="submit"
+                    disabled={this.state.buttonStateDisable}
+                    onClick={this.modalHandler}
+                    className={buttonClasses}
+                    value="Send to me!" />
+                {modal &&
+                    <div className="container-modal">
+                        <div className="modal-card" onSubmit={this.sendFiles}>
+                            <div className="modal-header"><div className="close-btn" onClick={this.modalHandler}>+</div></div>
+                            <div className="modal-icon"></div>
+                            <div className="title">Thank You for your interest!</div>
+                            <div className="subtitle">Thank You for your interest! Selected files has been sent to {password} address</div>
+                            <div className="button modal-button"  onClick={this.modalHandler}>Ok!</div>
+                        </div>
+                        
+                    </div>}
             </div>
         )
     }

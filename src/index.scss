@@ -8,6 +8,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  margin-bottom: 90px;
 }
 
 * {
@@ -15,6 +16,11 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: "Segoe UI";
+}
+
+hr {
+  margin: 0 40px;
+  border: 1px solid #DCDCDC;
 }
 
 .file-input {
@@ -26,10 +32,21 @@ input {
 }
 
 .logo {
-  background: url('./img/logo.png');
-  width: 100px;
-  height: 152px;
+  background: url('./img/logo2.png');
+  width: 77px;
+  height: 103px;
+  margin-top: 38px;
 }
+
+.logo-background .title {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 100px;
+}
+
 
 .investors-page .container {
   width: 100%;
@@ -39,11 +56,12 @@ input {
 .investors-page .container .header {
   height: 554px;
   width: 100%;
-  background: url('./img/MaskGroup.jpg') no-repeat;
+  background: url('./img/header.png') no-repeat;
   background-size: cover;
   display: flex;
   justify-content: center;
 }
+
 
 .content-investors {
   display: flex;
@@ -55,8 +73,8 @@ input {
 }
 
 .content-investors .logo-container {
-  width: 276px;
-  height: 276px;
+  width: 358px;
+  height: 358px;
   border: 1px white solid;
   border-radius: 50%;
   display: flex;
@@ -65,59 +83,73 @@ input {
 }
 
 .content-investors .logo-background {
-  width: 248px;
-  height: 248px;
+  width: 322px;
+  height: 322px;
   border-radius: 50%;
-  background: #EFFF36;
+  background: #CA437E;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
 }
 
 .content-investors .logo-background .logo {
+  z-index: 99;
+}
+ .logo-filefolder {
+  background: url('./img/logo-smal.png');
+  width: 75px;
+  height: 110px;
+  margin-top: 38px;
   z-index: 99;
 }
 
 
 .investors-from {
   width: 530px;
-  height: 314px;
+  height: 344px;
   background: #fff;
   box-shadow: 0px 20px 120px rgba(0, 0, 0, 0.08);
   margin-top: -90px;
-}
 
-.investors-from .title {
-  margin-top: 48px;
-  text-align: center;
-  color: #1e1e1e;
-  font-size: 32px;
-  height: 40px;
-  width: 100%;
-  font-weight: 700;
-}
+  .title {
+    margin-top: 44px;
+    text-align: center;
+    color: #1e1e1e;
+    font-size: 24px;
+    height: 40px;
+    width: 100%;
+    font-weight: 600;
+  }
 
+  .subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: #595959;
+  } 
 
-.investors-from .password-field {
-  height: 54px;
-  width: 90%;
-  margin: 0 auto;
-  margin-top: 50px;
-  border-radius: 4px;
-  border: #ebebeb 2px solid;
-  padding-left: 24px;
-  font-size: 18px;
-  display: flex;
-  margin-bottom: 20px;
+  .password-field {
+    height: 54px;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 34px;
+    border-radius: 4px;
+    border: #ebebeb 2px solid;
+    padding-left: 24px;
+    font-size: 18px;
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  
 }
 
 .fail-pass {
   color: red;
-  text-align: center;
-  margin-top: 10px;
+  margin-left: 52px;
+  margin-top: -12px;
   font-weight: 300;
-  font-size: 20px;
-  margin-bottom: 40px;
+  font-size: 15px;
+  margin-bottom: 18px;
 }
 
 .button {
@@ -129,13 +161,27 @@ input {
   font-size: 24px;
   font-weight: 500;
   display: flex;
-  margin: 0 auto;
+  z-index: 99;
+  margin: 0 auto; 
+  width: 305px;
   cursor: pointer;
+  text-align: center;
+  justify-content: center;
+  transition: all .1s;
 }
+
+.button:hover {
+  background: rgb(1, 133, 69);
+}
+
 
 .disabled-btn {
   background: #B2CBBF;
   cursor: auto;
+}
+
+.disabled-btn:hover {
+  background: #B2CBBF;
 }
 
 .light-theme-title {
@@ -150,18 +196,69 @@ input {
 
 .investors-list-container {
   width: 530px;
-  height: 500px;
   background: #fff;
   box-shadow: 0px 20px 120px rgba(0, 0, 0, 0.08);
-  margin-top: 50px;
+  margin-top: -236px;
+  margin-bottom: -43px;
   width: 100%;
-  margin-bottom: 32px;
-  overflow: auto;
   z-index: 0;
+
+  .title {
+    margin-top: 55px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #C8427D;
+    text-align: center;
+  }
+
+  .subtitile-filelist {
+    font-weight: 500;
+    font-size: 18px;
+    color: #454545;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 10px;
+    margin-bottom: 27px;
+  }
+
+  .footer-btn {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin: 12px 50px 75px 50px;
+
+    .btn-more {
+      font-size: 20px;
+      font-weight: 500;
+      color: #CA437E;
+      cursor: pointer;
+    }
+
+    .btn-clear {
+      padding: 6px 33px;
+      border: 2px solid #005A2F;
+      border-radius: 100px;
+      color: #005A2F;
+      font-size: 18px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .1s;
+    }
+
+    .btn-clear:hover {
+      background: #005A2F;
+      color: #fff;
+    }
+  }
 }
 
 .button-send {
   margin-top: -32px;
+}
+
+.file-list {
+  height: 376px;
+  overflow: auto;
 }
 
 ul {
@@ -169,7 +266,7 @@ ul {
   margin-top: 10px;
 }
 
-.file {
+.noselected-file {
   display: flex;
   align-items: center;
   padding-left: 50px;
@@ -178,13 +275,38 @@ ul {
   cursor: pointer;
 }
 
-.file:hover {
+.noselected-file:hover {
   background: #F4F4F4;
 }
 
+.noselected-file::before {
+  content: "";
+  background-image: url('./img/vector-disabled.png');
+  margin-right: 10px;
+  display: block;
+  width: 16px;
+  height: 12px;
+  
+}
+
+
 .selected-file {
   background: #F4F4F4;
-  padding-left: 24px;
+  display: flex;
+  align-items: center;
+  padding-left: 50px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  cursor: pointer;
+}
+
+.selected-file::before {
+  content: "";
+  background-image: url('./img/Vector.png');
+  margin-right: 10px;
+  display: block;
+  width: 16px;
+  height: 12px;
 }
 
 .type-icon {
@@ -220,14 +342,7 @@ ul {
   background-image: url('https://image.flaticon.com/icons/svg/254/254644.svg');
 }
 
-.selected-file::before {
-  content: "";
-  background-image: url('./img/Vector.png');
-  margin-right: 10px;
-  display: block;
-  width: 16px;
-  height: 12px;
-}
+
 
 .delete-file:hover::before {
   content: '';
@@ -293,46 +408,50 @@ ul {
 
 .modal-card {
   width: 530px;
-  height: 400px;
   background: #fff;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   flex-direction: column;
+  text-align: center; 
+  
+  .title {
+    color: #C8427D;
+    font-size: 28px;
+    font-weight: 600;
+    padding-bottom: 24px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    color: #454545;
+    margin-bottom: 35px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: -35px;
+  }
+
+  .modal-button {
+    margin-bottom: -30px;
+  }
+
 }
 
 
 .modal-icon {
   background-image: url('./img/mail\ \(2\)\ 1.png');
-  width: 84px;
-  height: 84px;
+  width: 70px;
+  height: 70px;
   margin-top: 35px;
   margin-bottom: 22px;
-}
-
-.modal-card .title {
-  color: #1e1e1e;
-  font-size: 32px;
-  font-weight: 600;
-  padding-bottom: 24px;
-}
-
-.modal-card .email-input {
-  height: 54px;
-  width: 414px;
-  border-radius: 4px;
-  border: #ebebeb 2px solid;
-  padding-left: 24px;
-  font-size: 18px;
-  display: flex;
-  margin-bottom: 20px;
-}
-
-.modal-card .modal-header {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  margin-bottom: -35px;
 }
 
 .close-btn {
@@ -343,4 +462,63 @@ ul {
   transform: rotate(45deg);
   cursor: pointer;
   user-select: none;
+}
+
+
+
+@media only screen and (max-device-width: 480px) {
+  .investors-from {
+    width: 350px;
+  }  
+
+  .content-investors {
+    .logo-container {
+      width: 312px;
+      height: 312px;
+    }
+
+    .logo-background {
+      width: 280px;
+      height: 280px;
+      
+      .logo {
+        width: 43px;
+        height: 59px;
+        background-size: contain;
+      }
+
+      .title {
+        font-size: 24px;
+        margin-bottom: 140px;
+      }
+    }
+
+    .investors-from {
+      margin-top: -145px;
+
+      .title { font-size: 20px;}
+      .subtitle {
+        font-size: 16px;
+        margin: 0 50px; 
+      }
+
+      .password-field {
+        margin-top: 16  px;
+      }
+    }
+
+
+    .investors-list-container {
+      margin-top: -189px;
+      margin-right: 12px;
+      margin-left: 12px;
+    }
+    
+    .modal-card {
+      margin-right: 12px;
+      margin-left: 12px;
+      text-align: center;
+    }
+   
+  } 
 }
